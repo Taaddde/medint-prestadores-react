@@ -24,6 +24,11 @@ const languages = [
 		id: 'ar',
 		title: 'Arabic',
 		flag: 'sa'
+	},
+	{
+		id: 'es',
+		title: 'Español',
+		flag: 'es'
 	}
 ];
 
