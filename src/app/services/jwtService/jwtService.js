@@ -2,6 +2,7 @@ import FuseUtils from '@fuse/utils/FuseUtils';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 /* eslint-disable camelcase */
+import AUTH_CONFIG from './jwtConfig';
 
 class JwtService extends FuseUtils.EventEmitter {
 	init() {
@@ -61,13 +62,14 @@ class JwtService extends FuseUtils.EventEmitter {
 	signInWithEmailAndPassword = (email, password) => {
 		return new Promise((resolve, reject) => {
 			axios
-				.get('/api/auth', {
+				.get(AUTH_CONFIG.domain + '/api/prestador/login', {
 					data: {
 						email,
 						password
 					}
 				})
 				.then(response => {
+					console.log(response);
 					if (response.data.user) {
 						this.setSession(response.data.access_token);
 						resolve(response.data.user);
