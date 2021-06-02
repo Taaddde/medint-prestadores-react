@@ -59,49 +59,44 @@ class JwtService extends FuseUtils.EventEmitter {
 		});
 	};
 
-	signInWithEmailAndPassword = (email, password) => {
-		return new Promise((resolve, reject) => {
-			axios
-				.get(AUTH_CONFIG.domain + '/api/prestador/login', {
-					data: {
-						email,
-						password
-					}
-				})
-				.then(response => {
-					console.log(response);
-					if (response.data.user) {
-						this.setSession(response.data.access_token);
-						resolve(response.data.user);
-					} else {
-						reject(response.data.error);
-					}
-				});
-		});
-	};
+	signInWithEmailAndPassword = async (email, password) => {
 
-	signInWithToken = () => {
-		return new Promise((resolve, reject) => {
-			axios
-				.get('/api/auth/access-token', {
-					data: {
-						access_token: this.getAccessToken()
-					}
-				})
-				.then(response => {
-					if (response.data.user) {
-						this.setSession(response.data.access_token);
-						resolve(response.data.user);
-					} else {
-						this.logout();
-						reject(new Error('Failed to login with token.'));
-					}
-				})
-				.catch(error => {
-					this.logout();
-					reject(new Error('Failed to login with token.'));
-				});
-		});
+		const options = {
+			data: {
+				email,
+				password
+			},
+			method: 'POST',
+			url: `${AUTH_CONFIG.domain}/prestador/login`,
+			path: '',
+			'headers': {
+				'accept': 'application/json',
+				'content-type': 'application/json'
+			}
+		}
+		const resp = await axios(options);
+		return resp;
+	}
+
+
+	signInWithToken = async () => {
+
+		const token = localStorage.getItem('token');
+
+		const options = {
+			data: {
+				access_token: token
+			},
+			method: 'POST',
+			url: `${AUTH_CONFIG.domain}/prestador/renew`,
+			path: '',
+			'headers': {
+				'accept': 'application/json',
+				'content-type': 'application/json'
+			}
+		}
+		const resp = await axios(options);
+		return resp;
 	};
 
 	updateUserData = user => {

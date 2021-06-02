@@ -16,16 +16,22 @@ import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 import _ from '@lodash';
 
+import instance from 'app/services/jwtService/jwtService';
+import { loginError } from 'app/auth/store/loginSlice';
+import store from 'app/store';
+import userSlice, { setUser } from 'app/auth/store/userSlice';
+import { useEffect } from 'react';
+
 const useStyles = makeStyles(theme => ({
 	root: {}
 }));
 
 const backgroundStyle = {
-	backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-	backgroundImage: "url(assets/images/backgrounds/background1.jpg)",
-	height: "100%"
+	backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+	backgroundImage: 'url(assets/images/backgrounds/background1.jpg)',
+	height: '100%'
 }
 
 /**
@@ -55,9 +61,31 @@ function Login2Page() {
 
 	const { isValid, dirtyFields, errors } = formState;
 
-	function onSubmit() {
-		reset(defaultValues);
-	}
+	async function onSubmit(data) {
+
+		const resp = await instance.signInWithEmailAndPassword(data.email, data.password);
+		
+		const {token} = resp.data;
+		const {_id, nombre, email, id_obra_social: idObraSocial} = resp.data.prestador;
+
+		if(token){
+			
+			localStorage.setItem('token', token);
+		
+			store.dispatch(setUser({
+				_id,
+				nombre,
+				email,
+				idObraSocial
+			}));
+		
+		// reset(defaultValues);
+		};
+
+		
+	};
+
+
 
 	return (
 		<div className={clsx(classes.root, 'flex flex-col flex-auto p-16 sm:p-24 md:flex-row md:p-0 overflow-hidden')}>

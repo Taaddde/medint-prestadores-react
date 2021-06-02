@@ -9,7 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logoutUser } from 'app/auth/store/userSlice';
+import { logoutUser, userLoggedOut } from 'app/auth/store/userSlice';
+import store from 'app/store';
 
 function UserMenu(props) {
 	const dispatch = useDispatch();
@@ -23,6 +24,12 @@ function UserMenu(props) {
 
 	const userMenuClose = () => {
 		setUserMenu(null);
+	};
+
+	const handleLogout = () => {
+
+		localStorage.removeItem('token');
+		store.dispatch(userLoggedOut());
 	};
 
 	return (
@@ -63,17 +70,11 @@ function UserMenu(props) {
 			>
 				{!user.role || user.role.length === 0 ? (
 					<>
-						<MenuItem component={Link} to="/login" role="button">
+						<MenuItem component={Link} to="/login" role="button" onClick={handleLogout}>
 							<ListItemIcon className="min-w-40">
-								<Icon>lock</Icon>
+								<Icon>exit_to_app</Icon>
 							</ListItemIcon>
-							<ListItemText primary="Login" />
-						</MenuItem>
-						<MenuItem component={Link} to="/register" role="button">
-							<ListItemIcon className="min-w-40">
-								<Icon>person_add</Icon>
-							</ListItemIcon>
-							<ListItemText primary="Register" />
+							<ListItemText primary="Salir" />
 						</MenuItem>
 					</>
 				) : (

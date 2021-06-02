@@ -15,6 +15,10 @@ import AppContext from './AppContext';
 import { Auth } from './auth';
 import routes from './fuse-configs/routesConfig';
 import store from './store';
+import { useEffect } from 'react';
+import instance from './services/jwtService/jwtService';
+import { setUser } from './auth/store/userSlice';
+
 
 const jss = create({
 	...jssPreset(),
@@ -24,7 +28,26 @@ const jss = create({
 
 const generateClassName = createGenerateClassName({ disableGlobal: true });
 
+
 const App = () => {
+
+	async function onRefresh() {
+		const resp = await instance.signInWithToken();
+		const {_id, nombre, email, id_obra_social: idObraSocial} = resp.data.prestador;
+	
+		store.dispatch(setUser({
+			_id,
+			nombre,
+			email,
+			idObraSocial
+		}));
+	
+	};
+	
+	useEffect(() => {
+		onRefresh();
+	}, []);
+
 	return (
 		<AppContext.Provider
 			value={{

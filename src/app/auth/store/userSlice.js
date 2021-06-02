@@ -189,10 +189,12 @@ export const updateUserData = user => async (dispatch, getState) => {
 const initialState = {
 	role: [], // guest
 	data: {
-		displayName: 'John Doe',
-		photoURL: 'assets/images/avatars/Velazquez.jpg',
-		email: 'johndoe@withinpixels.com',
-		shortcuts: ['calendar', 'mail', 'contacts', 'todo']
+		id: '',
+		displayName: '',
+		// photoURL: 'assets/images/avatars/Velazquez.jpg',
+		email: '',
+		idObraSocial: ''
+		// shortcuts: ['calendar', 'mail', 'contacts', 'todo']
 	}
 };
 
@@ -200,7 +202,12 @@ const userSlice = createSlice({
 	name: 'auth/user',
 	initialState,
 	reducers: {
-		setUser: (state, action) => action.payload,
+		setUser: (state, action) => {
+			state.data.id = action.payload._id,
+			state.data.displayName = action.payload.nombre,
+			state.data.email = action.payload.email,
+			state.data.idObraSocial = action.payload.idObraSocial
+		},
 		userLoggedOut: (state, action) => initialState
 	},
 	extraReducers: {}
