@@ -12,7 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import _ from '@lodash';
 
@@ -20,7 +20,6 @@ import instance from 'app/services/jwtService/jwtService';
 import { loginError } from 'app/auth/store/loginSlice';
 import store from 'app/store';
 import userSlice, { setUser } from 'app/auth/store/userSlice';
-import { useEffect } from 'react';
 
 const useStyles = makeStyles(theme => ({
 	root: {}
@@ -51,9 +50,12 @@ const defaultValues = {
 };
 
 function Login2Page() {
+
+	const history = useHistory();
+
 	const classes = useStyles();
 
-	const { control, formState, handleSubmit, reset } = useForm({
+	const { control, formState, handleSubmit } = useForm({
 		mode: 'onChange',
 		defaultValues,
 		resolver: yupResolver(schema)
@@ -78,14 +80,16 @@ function Login2Page() {
 				email,
 				idObraSocial
 			}));
-		
-		// reset(defaultValues);
+			
+			history.push("/");
+
 		};
 
 		
 	};
 
-
+	
+	
 
 	return (
 		<div className={clsx(classes.root, 'flex flex-col flex-auto p-16 sm:p-24 md:flex-row md:p-0 overflow-hidden')}>

@@ -193,7 +193,8 @@ const initialState = {
 		displayName: '',
 		// photoURL: 'assets/images/avatars/Velazquez.jpg',
 		email: '',
-		idObraSocial: ''
+		idObraSocial: '',
+		autenticado: false
 		// shortcuts: ['calendar', 'mail', 'contacts', 'todo']
 	}
 };
@@ -206,7 +207,8 @@ const userSlice = createSlice({
 			state.data.id = action.payload._id,
 			state.data.displayName = action.payload.nombre,
 			state.data.email = action.payload.email,
-			state.data.idObraSocial = action.payload.idObraSocial
+			state.data.idObraSocial = action.payload.idObraSocial,
+			state.data.autenticado = true
 		},
 		userLoggedOut: (state, action) => initialState
 	},
