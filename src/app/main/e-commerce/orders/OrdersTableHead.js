@@ -19,52 +19,24 @@ import { removeOrders } from '../store/ordersSlice';
 
 const rows = [
 	{
-		id: 'id',
+		id: 'paciente',
 		align: 'left',
 		disablePadding: false,
-		label: 'ID',
-		sort: true
-	},
-	{
-		id: 'reference',
-		align: 'left',
-		disablePadding: false,
-		label: 'Reference',
-		sort: true
-	},
-	{
-		id: 'customer',
-		align: 'left',
-		disablePadding: false,
-		label: 'Customer',
+		label: 'Paciente',
 		sort: true
 	},
 	{
 		id: 'total',
-		align: 'right',
+		align: 'left',
 		disablePadding: false,
-		label: 'Total',
+		label: 'Nro. Socio',
 		sort: true
 	},
 	{
-		id: 'payment',
+		id: 'facturado',
 		align: 'left',
 		disablePadding: false,
-		label: 'Payment',
-		sort: true
-	},
-	{
-		id: 'status',
-		align: 'left',
-		disablePadding: false,
-		label: 'Status',
-		sort: true
-	},
-	{
-		id: 'date',
-		align: 'left',
-		disablePadding: false,
-		label: 'Date',
+		label: 'Total Facturado',
 		sort: true
 	}
 ];
@@ -102,11 +74,11 @@ function OrdersTableHead(props) {
 		<TableHead>
 			<TableRow className="h-48 sm:h-64">
 				<TableCell padding="none" className="w-40 md:w-64 text-center z-99">
-					<Checkbox
+					{/* <Checkbox
 						indeterminate={numSelected > 0 && numSelected < props.rowCount}
 						checked={props.rowCount !== 0 && numSelected === props.rowCount}
 						onChange={props.onSelectAllClick}
-					/>
+					/> */}
 					{numSelected > 0 && (
 						<div
 							className={clsx(

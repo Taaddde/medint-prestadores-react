@@ -32,6 +32,9 @@ function OrdersTable(props) {
 		id: null
 	});
 
+	console.log(orders);
+	console.log(data);
+
 	useEffect(() => {
 		dispatch(getOrders()).then(() => setLoading(false));
 	}, [dispatch]);
@@ -72,7 +75,7 @@ function OrdersTable(props) {
 	}
 
 	function handleClick(item) {
-		props.history.push(`/apps/e-commerce/orders/${item.id}`);
+		props.history.push(`/home/${item.id}`);
 	}
 
 	function handleCheck(event, id) {
@@ -172,44 +175,27 @@ function OrdersTable(props) {
 										onClick={event => handleClick(n)}
 									>
 										<TableCell className="w-40 md:w-64 text-center" padding="none">
-											<Checkbox
+											{/* <Checkbox
 												checked={isSelected}
 												onClick={event => event.stopPropagation()}
 												onChange={event => handleCheck(event, n.id)}
-											/>
-										</TableCell>
-
-										<TableCell className="p-4 md:p-16" component="th" scope="row">
-											{n.id}
-										</TableCell>
-
-										<TableCell className="p-4 md:p-16" component="th" scope="row">
-											{n.reference}
+											/> */}
 										</TableCell>
 
 										<TableCell className="p-4 md:p-16 truncate" component="th" scope="row">
-											{`${n.customer.firstName} ${n.customer.lastName}`}
-										</TableCell>
-
-										<TableCell className="p-4 md:p-16" component="th" scope="row" align="right">
-											<span>$</span>
-											{n.total}
+											{n.nombre}
 										</TableCell>
 
 										<TableCell className="p-4 md:p-16" component="th" scope="row">
-											{n.payment.method}
+											{n.socio}
 										</TableCell>
 
 										<TableCell className="p-4 md:p-16" component="th" scope="row">
-											<OrdersStatus name={n.status[0].name} />
-										</TableCell>
-
-										<TableCell className="p-4 md:p-16" component="th" scope="row">
-											{n.date}
+											{n.totalFacturado}
 										</TableCell>
 									</TableRow>
 								);
-							})}
+							 })}
 					</TableBody>
 				</Table>
 			</FuseScrollbars>
