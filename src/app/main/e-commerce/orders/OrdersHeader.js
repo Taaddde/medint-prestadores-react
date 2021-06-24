@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Icon from '@material-ui/core/Icon';
 import Input from '@material-ui/core/Input';
 import Paper from '@material-ui/core/Paper';
@@ -6,12 +7,36 @@ import Typography from '@material-ui/core/Typography';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectMainTheme } from 'app/store/fuse/settingsSlice';
-import { setOrdersSearchText } from '../store/ordersSlice';
+import { getOrders, getUrl, setOrdersSearchText } from '../store/ordersSlice';
+import { getCurrentMonthAndYear, getPreviousMonthAndYear } from 'app/services/dateService/dateService';
+
 
 function OrdersHeader(props) {
 	const dispatch = useDispatch();
 	const searchText = useSelector(({ eCommerceApp }) => eCommerceApp.orders.searchText);
 	const mainTheme = useSelector(selectMainTheme);
+	const data = useSelector(state => state.eCommerceApp.orders.entities);
+	const { id: idPrestador } = useSelector(state => state.auth.user.data);
+	
+	const today = getCurrentMonthAndYear();
+	const [date, setDate] = useState(today);
+
+	const handleChange = (e) => {
+		setDate(e.target.value);
+	}
+
+	useEffect(() => {
+		const url = getUrl(date, idPrestador);
+		dispatch(getOrders(url));
+
+		if(Object.keys(data).length === 0){
+			const lastMonth = getPreviousMonthAndYear();
+			setDate(lastMonth);
+			const url = getUrl(date);
+			dispatch(getOrders(url));
+		} 
+	}, [date])
+	
 
 	return (
 		<div className="flex flex-1 w-full items-center justify-between">
@@ -29,7 +54,7 @@ function OrdersHeader(props) {
 					initial={{ x: -20 }}
 					animate={{ x: 0, transition: { delay: 0.2 } }}
 					delay={300}
-					className="text-16 md:text-24 mx-12 font-semibold"
+					className="text-16 md:text-24 mx-12 font-semibold"		
 				>
 					Listado de pacientes
 				</Typography>
@@ -57,7 +82,20 @@ function OrdersHeader(props) {
 							onChange={ev => dispatch(setOrdersSearchText(ev))}
 						/>
 					</Paper>
+					
 				</ThemeProvider>
+		
+				<Input
+					type="month"
+					name="date"
+					style={{
+					margin: '0 0 0 auto'
+					}}
+					value={date}
+					onChange={handleChange}
+				/>
+	
+				
 			</div>
 		</div>
 	);

@@ -1,11 +1,24 @@
+import { useState } from 'react';
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
-export const getOrders = createAsyncThunk('eCommerceApp/orders/getOrders', async () => {
+export const getUrl = (date, id) => {
+
+	const splitdate = date.split('-');
+	const year = splitdate[0];
+	const month = splitdate[1];
+
+	return `http://localhost:2000/api/carpeta/prestadores/list?mes=${month}&ano=${year}&prestador=${id}`;
+	
+
+}
+
+export const getOrders = createAsyncThunk('eCommerceApp/orders/getOrders', async (url) => {
 
 	const options = {
 		method: 'GET',
-		url: `http://localhost:2000/api/carpeta/prestadores/list?mes=mayo&ano=2021&prestador=605c0250c0f65234d4328ff1`,
+		url: `${url}`,
 		path: '',
 		headers: {
 			'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MDVjMDI1MGMwZjY1MjM0ZDQzMjhmZjEiLCJub21icmUiOiJPTUlOVCIsImlkX29icmFfc29jaWFsIjoiMjQiLCJlbWFpbCI6Im9taW50QG9taW50LmNvbSIsImlhdCI6MTYyMzI3OTUwMiwiZXhwIjoxNjIzMjg0OTAyfQ.H_JHXG7qGIwWi94yBYXOGIwvziYonKZdoHi76ECPF2A'
@@ -14,8 +27,6 @@ export const getOrders = createAsyncThunk('eCommerceApp/orders/getOrders', async
 
 	const response = await axios(options);
 	const data = await response.data;
-
-	console.log(data);
 
 	return data;
 });

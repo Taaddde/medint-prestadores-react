@@ -25,14 +25,13 @@ function Orders() {
 			/>
 		);
 	}
-	else{
-		return(
-			<Redirect to="/login" />
-		);
+
+	return(
+		<Redirect to="/login" />
+	)
+	
 		
 	}
 
-	
-}
 
 export default withReducer('eCommerceApp', reducer)(Orders);

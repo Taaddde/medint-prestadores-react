@@ -32,9 +32,6 @@ function OrdersTable(props) {
 		id: null
 	});
 
-	console.log(orders);
-	console.log(data);
-
 	useEffect(() => {
 		dispatch(getOrders()).then(() => setLoading(false));
 	}, [dispatch]);
