@@ -26,8 +26,8 @@ function Order(props) {
 	const [tabValue, setTabValue] = useState(0);
 	const [noOrder, setNoOrder] = useState(false);
 
-	useDeepCompareEffect(() => {
-		dispatch(getOrder(routeParams)).then(action => {
+		useDeepCompareEffect(() => {
+			dispatch(getOrder(routeParams)).then(action => {
 			if (!action.payload) {
 				setNoOrder(true);
 			}
