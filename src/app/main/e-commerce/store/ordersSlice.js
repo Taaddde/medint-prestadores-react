@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+
 
 export const getUrl = (date, id) => {
 
@@ -9,7 +8,7 @@ export const getUrl = (date, id) => {
 	const year = splitdate[0];
 	const month = splitdate[1];
 
-	return `http://localhost:2000/api/carpeta/prestadores/list?mes=${month}&ano=${year}&prestador=${id}`;
+	return `http://localhost:2000/api/v1/prestador/carpeta/list?mes=${month}&ano=${year}&prestador=${id}`;
 	
 
 }

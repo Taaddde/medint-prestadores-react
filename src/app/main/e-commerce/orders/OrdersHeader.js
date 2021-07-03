@@ -7,8 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectMainTheme } from 'app/store/fuse/settingsSlice';
-import { getOrders, getUrl, setOrdersSearchText } from '../store/ordersSlice';
 import { getCurrentMonthAndYear, getPreviousMonthAndYear } from 'app/services/dateService/dateService';
+import { getOrders, getUrl, setOrdersSearchText } from '../store/ordersSlice';
 
 
 function OrdersHeader(props) {
@@ -19,7 +19,7 @@ function OrdersHeader(props) {
 	const { id: idPrestador } = useSelector(state => state.auth.user.data);
 	
 	const today = getCurrentMonthAndYear();
-	const [date, setDate] = useState(today);
+	const[date, setDate] = useState(today);
 
 	const handleChange = (e) => {
 		setDate(e.target.value);
@@ -32,11 +32,10 @@ function OrdersHeader(props) {
 		if(Object.keys(data).length === 0){
 			const lastMonth = getPreviousMonthAndYear();
 			setDate(lastMonth);
-			const url = getUrl(date);
+			const url = getUrl(date, idPrestador);
 			dispatch(getOrders(url));
 		} 
 	}, [date])
-	
 
 	return (
 		<div className="flex flex-1 w-full items-center justify-between">
