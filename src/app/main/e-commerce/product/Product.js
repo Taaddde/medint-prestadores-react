@@ -18,10 +18,8 @@ import { resetProduct, newProduct, getProduct } from '../store/productSlice';
 import reducer from '../store';
 import ProductHeader from './ProductHeader';
 import BasicInfoTab from './tabs/BasicInfoTab';
-import InventoryTab from './tabs/InventoryTab';
 import PricingTab from './tabs/PricingTab';
 import ProductImagesTab from './tabs/ProductImagesTab';
-import ShippingTab from './tabs/ShippingTab';
 
 /**
  * Form Validation Schema
