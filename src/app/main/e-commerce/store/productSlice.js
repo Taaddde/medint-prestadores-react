@@ -1,9 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import FuseUtils from '@fuse/utils';
+import AUTH_CONFIG from 'app/services/jwtService/jwtConfig';
 
 export const getProduct = createAsyncThunk('eCommerceApp/product/getProduct', async params => {
-	const response = await axios.get('/api/e-commerce-app/product', { params });
+
+	const token = localStorage.getItem('token');
+
+	const options = {
+		method: 'GET',
+		url: `${AUTH_CONFIG.domain}/v1/prestador/documento/list/${params.sesionId}`,
+		headers: {
+			'Authorization': token
+		}
+	}
+
+	const response = await axios(options);
 	const data = await response.data;
 
 	return data === undefined ? null : data;

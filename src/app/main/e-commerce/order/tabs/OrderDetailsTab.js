@@ -20,8 +20,8 @@ function Marker(props) {
 }
 
 function OrderDetailsTab() {
-	const order = useSelector(({ eCommerceApp }) => eCommerceApp.order);
-	const [map, setMap] = useState('shipping');
+	const consentimientos = useSelector(({ eCommerceApp }) => eCommerceApp.order);
+	// const [map, setMap] = useState('shipping');
 
 	return (
 		<div>
@@ -35,7 +35,14 @@ function OrderDetailsTab() {
 
 				<div className="mb-24">
 					<div className="table-responsive mb-48">
-						<table className="simple">
+						{/* {
+							consentimientos.map(c => {
+								return(
+								<img key={`${c._id}`} src={`${c.archivo}`} alt="Consentimiento"></img>)
+							})
+						}
+						 */}
+						{/* <table className="simple">
 							<thead>
 								<tr>
 									<th>
@@ -51,8 +58,8 @@ function OrderDetailsTab() {
 										<Typography className="font-semibold">Company</Typography>
 									</th>
 								</tr>
-							</thead>
-							<tbody>
+							</thead> */}
+							{/* <tbody>
 								<tr>
 									<td>
 										<div className="flex items-center">
@@ -72,11 +79,12 @@ function OrderDetailsTab() {
 										<span className="truncate">{order.customer.company}</span>
 									</td>
 								</tr>
-							</tbody>
-						</table>
+							</tbody> */}
+						{/* </table> */}
 					</div>
+				</div>
 
-					<Accordion
+					{/* <Accordion
 						className="border-0 shadow-0 overflow-hidden"
 						expanded={map === 'shipping'}
 						onChange={() => setMap(map !== 'shipping' ? 'shipping' : false)}
@@ -148,9 +156,9 @@ function OrderDetailsTab() {
 						</AccordionDetails>
 					</Accordion>
 				</div>
-			</div>
+			</div> */}
 
-			<div className="pb-48">
+			{/* <div className="pb-48">
 				<div className="pb-16 flex items-center">
 					<Icon color="action">access_time</Icon>
 					<Typography className="h2 mx-12 font-medium" color="textSecondary">
@@ -182,17 +190,17 @@ function OrderDetailsTab() {
 						</tbody>
 					</table>
 				</div>
-			</div>
+			</div> */}
 
-			<div className="pb-48">
+			{/* <div className="pb-48">
 				<div className="pb-16 flex items-center">
 					<Icon color="action">attach_money</Icon>
 					<Typography className="h2 mx-12 font-medium" color="textSecondary">
 						Payment
 					</Typography>
-				</div>
+				</div> */}
 
-				<div className="table-responsive">
+				{/* <div className="table-responsive">
 					<table className="simple">
 						<thead>
 							<tr>
@@ -228,9 +236,9 @@ function OrderDetailsTab() {
 						</tbody>
 					</table>
 				</div>
-			</div>
+			</div> */}
 
-			<div className="pb-48">
+			{/* <div className="pb-48">
 				<div className="pb-16 flex items-center">
 					<Icon color="action">local_shipping</Icon>
 					<Typography className="h2 mx-12 font-medium" color="textSecondary">
@@ -281,10 +289,10 @@ function OrderDetailsTab() {
 							))}
 						</tbody>
 					</table>
+				</div>*/}
 				</div>
 			</div>
-		</div>
-	);
+	); 
 }
 
 export default OrderDetailsTab;

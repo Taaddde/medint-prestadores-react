@@ -33,6 +33,12 @@ const backgroundStyle = {
 	height: '100%'
 }
 
+const backgroundTextStyle = {
+	backgroundColor: 'rgba(255, 255, 255, 0.4)',
+	borderRadius: '5px',
+	padding: '15px',
+}
+
 /**
  * Form Validation Schema
  */
@@ -94,6 +100,7 @@ function Login2Page() {
 	return (
 		<div className={clsx(classes.root, 'flex flex-col flex-auto p-16 sm:p-24 md:flex-row md:p-0 overflow-hidden')}>
 			<div className="flex flex-col flex-grow-0 items-center p-16 text-center md:p-128 md:items-start md:flex-shrink-0 md:flex-1 md:text-left" style={backgroundStyle} >
+			<div style={backgroundTextStyle}>
 				<motion.div
 					initial={{ opacity: 0, scale: 0.6 }}
 					animate={{ opacity: 1, scale: 1, transition: { delay: 0.1 } }}
@@ -113,6 +120,7 @@ function Login2Page() {
 						Aplicación completa para los prestadores afiliados con MEDINT.
 					</Typography>
 				</motion.div>
+				</div>
 			</div>
 
 			<Card
@@ -171,23 +179,6 @@ function Login2Page() {
 								/>
 							)}
 						/>
-
-						<div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between">
-							<Controller
-								name="remember"
-								control={control}
-								render={({ field }) => (
-									<FormControl>
-										<FormControlLabel label="Recordar" control={<Checkbox {...field} />} />
-									</FormControl>
-								)}
-							/>
-
-							<Link className="font-normal" to="/pages/auth/forgot-password-2">
-								¿Olvidaste la contraseña?
-							</Link>
-						</div>
-
 						<Button
 							variant="contained"
 							color="primary"

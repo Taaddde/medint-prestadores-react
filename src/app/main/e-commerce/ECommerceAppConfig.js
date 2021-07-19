@@ -20,6 +20,10 @@ const ECommerceAppConfig = {
 			path: '/home',
 			component: lazy(() => import('./orders/Orders'))
 		},
+		{
+			path: '/sesion/:sesionId',
+			component: lazy(() => import('./product/Product'))
+		},
 	]
 };
 

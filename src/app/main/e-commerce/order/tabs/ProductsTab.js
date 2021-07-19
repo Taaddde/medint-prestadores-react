@@ -1,9 +1,13 @@
 import Typography from '@material-ui/core/Typography';
+import { castDates } from 'app/services/dateService/dateService';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 function ProductsTab() {
-	const order = useSelector(({ eCommerceApp }) => eCommerceApp.order);
+	const sesiones = useSelector(({ eCommerceApp }) => eCommerceApp.order.sesiones);
+
+	castDates(sesiones);
+	
 
 	return (
 		<div className="table-responsive">
@@ -11,47 +15,49 @@ function ProductsTab() {
 				<thead>
 					<tr>
 						<th>
-							<Typography className="font-semibold">ID</Typography>
+							<Typography className="font-semibold">Código</Typography>
 						</th>
 						<th>
-							<Typography className="font-semibold">Image</Typography>
+							<Typography className="font-semibold">Descripción</Typography>
 						</th>
 						<th>
-							<Typography className="font-semibold">Name</Typography>
+							<Typography className="font-semibold">Cantidad</Typography>
 						</th>
 						<th>
-							<Typography className="font-semibold">Price</Typography>
+							<Typography className="font-semibold">Periodicidad</Typography>
 						</th>
 						<th>
-							<Typography className="font-semibold">Quantity</Typography>
+							<Typography className="font-semibold">Desde</Typography>
+						</th>
+						<th>
+							<Typography className="font-semibold">Hasta</Typography>
 						</th>
 					</tr>
 				</thead>
 				<tbody>
-					{order.products.map(product => (
-						<tr key={product.id}>
-							<td className="w-64">{product.id}</td>
-							<td className="w-80">
-								<img className="product-image" src={product.image} alt="product" />
-							</td>
+					{sesiones.map(sesion => (
+						<tr key={sesion._id}>
+							<td className="w-64">{sesion.prestacion?.codigo}</td>
 							<td>
 								<Typography
 									component={Link}
-									to={`/apps/e-commerce/products/${product.id}`}
+									to={`/sesion/${sesion._id}`}
 									className="truncate"
 									style={{
 										color: 'inherit',
 										textDecoration: 'underline'
 									}}
 								>
-									{product.name}
+									{sesion.prestacion?.descripcion}
 								</Typography>
 							</td>
+							<td className="w-64">{sesion.cantidad}</td>
+							<td className="w-64">{sesion.por}</td>
 							<td className="w-64 text-right">
-								<span className="truncate">${product.price}</span>
+								<span className="truncate">{sesion.fecha_desde}</span>
 							</td>
 							<td className="w-64 text-right">
-								<span className="truncate">{product.quantity}</span>
+								<span className="truncate">{sesion.fecha_hasta}</span>
 							</td>
 						</tr>
 					))}
