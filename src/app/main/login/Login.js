@@ -179,6 +179,23 @@ function Login2Page() {
 								/>
 							)}
 						/>
+
+						{/* <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between">
+							<Controller
+								name="remember"
+								control={control}
+								render={({ field }) => (
+									<FormControl>
+										<FormControlLabel label="Recordar" control={<Checkbox {...field} />} />
+									</FormControl>
+								)}
+							/>
+
+							<Link className="font-normal" to="/pages/auth/forgot-password-2">
+								¿Olvidaste la contraseña?
+							</Link>
+						</div> */}
+
 						<Button
 							variant="contained"
 							color="primary"

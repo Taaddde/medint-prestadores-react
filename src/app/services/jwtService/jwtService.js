@@ -60,7 +60,6 @@ class JwtService extends FuseUtils.EventEmitter {
 	};
 
 	signInWithEmailAndPassword = async (email, password) => {
-
 		const options = {
 			data: {
 				email,
@@ -69,18 +68,16 @@ class JwtService extends FuseUtils.EventEmitter {
 			method: 'POST',
 			url: `${AUTH_CONFIG.domain}/prestador/login`,
 			path: '',
-			'headers': {
-				'accept': 'application/json',
+			headers: {
+				accept: 'application/json',
 				'content-type': 'application/json'
 			}
-		}
+		};
 		const resp = await axios(options);
 		return resp;
-	}
-
+	};
 
 	signInWithToken = async () => {
-
 		const token = localStorage.getItem('token');
 
 		const options = {
@@ -90,11 +87,11 @@ class JwtService extends FuseUtils.EventEmitter {
 			method: 'POST',
 			url: `${AUTH_CONFIG.domain}/prestador/renew`,
 			path: '',
-			'headers': {
-				'accept': 'application/json',
+			headers: {
+				accept: 'application/json',
 				'content-type': 'application/json'
 			}
-		}
+		};
 		const resp = await axios(options);
 		return resp;
 	};

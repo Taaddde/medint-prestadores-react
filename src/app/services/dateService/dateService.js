@@ -1,5 +1,3 @@
-
-
 export const getCurrentMonthAndYear = () => {
     const date = new Date();
     const today = date.toISOString().slice(0,7);

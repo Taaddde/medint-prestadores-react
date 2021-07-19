@@ -41,7 +41,7 @@ function UserMenu(props) {
 					</Typography>
 					<Typography className="text-11 font-medium capitalize" color="textSecondary">
 						{user.role.toString()}
-						{(!user.role || (Array.isArray(user.role) && user.role.length === 0)) && 'Guest'}
+						{(!user.role || (Array.isArray(user.role) && user.role.length === 0)) && 'Financiador'}
 					</Typography>
 				</div>
 

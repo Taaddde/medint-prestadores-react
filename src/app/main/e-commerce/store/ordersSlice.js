@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
 import axios from 'axios';
+import AUTH_CONFIG from '../../../services/jwtService/jwtConfig';
 
 
 export const getUrl = (date, id) => {
@@ -8,7 +9,7 @@ export const getUrl = (date, id) => {
 	const year = splitdate[0];
 	const month = splitdate[1];
 
-	return `https://medinthome.com.ar/api/v1/prestador/carpeta/list?mes=${month}&ano=${year}&prestador=${id}`;
+	return `${AUTH_CONFIG.domain}/v1/prestador/carpeta/list?mes=${month}&ano=${year}&prestador=${id}`;
 	
 
 }
