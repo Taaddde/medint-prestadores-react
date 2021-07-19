@@ -39,7 +39,7 @@ function PricingTab(props) {
 								<td>
 									<Typography
 										component={Link}
-										to={{ pathname: `${AUTH_CONFIG.domain}/archivo/get/${archivo._id}` }}
+										to={{ pathname: `${AUTH_CONFIG.domain}/archivo/file?nombre=${archivo.nombre}&carpeta=${archivo.carpeta}` }}
 										target="_blank"
 										className="truncate"
 										style={{
