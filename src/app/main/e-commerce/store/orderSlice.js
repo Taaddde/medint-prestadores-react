@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const getOrder = createAsyncThunk('eCommerceApp/order/getOrder', async params => {
-	const response = await axios.get('/api/v1/prestador/documento/list/'+params.orderId);
+	const response = await axios.get(`/api/v1/prestador/documento/list/${params.orderId}`);
 	const data = await response.data;
 
 	return data === undefined ? null : data;

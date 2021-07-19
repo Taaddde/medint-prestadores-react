@@ -11,7 +11,7 @@ export const getPreviousMonthAndYear = () => {
     let month = date.getMonth();
     const year = date.getFullYear();
 
-    if(month < 10)  month = "0" + month;
+    if(month < 10)  month = `0${month}`;
     
 
     return `${year}-${month}`

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import FuseAuthorization from '@fuse/core/FuseAuthorization';
 import FuseLayout from '@fuse/core/FuseLayout';
 import FuseTheme from '@fuse/core/FuseTheme';
@@ -15,7 +16,6 @@ import AppContext from './AppContext';
 import { Auth } from './auth';
 import routes from './fuse-configs/routesConfig';
 import store from './store';
-import { useEffect } from 'react';
 import instance from './services/jwtService/jwtService';
 import { setUser } from './auth/store/userSlice';
 
