@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import AUTH_CONFIG from 'app/services/jwtService/jwtConfig';
 import axios from 'axios';
-import AUTH_CONFIG from '../../../services/jwtService/jwtConfig';
 
 export const getOrder = createAsyncThunk('eCommerceApp/order/getOrder', async params => {
 
