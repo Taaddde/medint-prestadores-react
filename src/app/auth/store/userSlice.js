@@ -204,10 +204,10 @@ const userSlice = createSlice({
 	initialState,
 	reducers: {
 		setUser: (state, action) => {
-			state.data.id = action.payload._id,
-			state.data.displayName = action.payload.nombre,
-			state.data.email = action.payload.email,
-			state.data.idObraSocial = action.payload.idObraSocial,
+			state.data.id = action.payload._id;
+			state.data.displayName = action.payload.nombre;
+			state.data.email = action.payload.email;
+			state.data.idObraSocial = action.payload.idObraSocial;
 			state.data.autenticado = true
 		},
 		userLoggedOut: (state, action) => initialState

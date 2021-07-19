@@ -26,13 +26,13 @@ function OrdersHeader(props) {
 	}
 
 	useEffect(() => {
-		const url = getUrl(date, idPrestador);
+		let url = getUrl(date, idPrestador);
 		dispatch(getOrders(url));
 
 		if(Object.keys(data).length === 0){
 			const lastMonth = getPreviousMonthAndYear();
 			setDate(lastMonth);
-			const url = getUrl(date, idPrestador);
+			url = getUrl(date, idPrestador);
 			dispatch(getOrders(url));
 		} 
 	}, [date])
