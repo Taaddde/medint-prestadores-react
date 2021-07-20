@@ -1,6 +1,5 @@
 import FuseSplashScreen from '@fuse/core/FuseSplashScreen';
 import auth0Service from 'app/services/auth0Service';
-import firebaseService from 'app/services/firebaseService';
 import jwtService from 'app/services/jwtService';
 import { Component } from 'react';
 import { connect } from 'react-redux';
@@ -92,41 +91,6 @@ class Auth extends Component {
 			} else {
 				resolve();
 			}
-
-			return Promise.resolve();
-		});
-
-	firebaseCheck = () =>
-		new Promise(resolve => {
-			firebaseService.init(success => {
-				if (!success) {
-					resolve();
-				}
-			});
-
-			firebaseService.onAuthStateChanged(authUser => {
-				if (authUser) {
-					this.props.showMessage({ message: 'Logging in with Firebase' });
-
-					/**
-					 * Retrieve user data from Firebase
-					 */
-					firebaseService.getUserData(authUser.uid).then(
-						user => {
-							this.props.setUserDataFirebase(user, authUser);
-
-							resolve();
-
-							this.props.showMessage({ message: 'Logged in with Firebase' });
-						},
-						error => {
-							resolve();
-						}
-					);
-				} else {
-					resolve();
-				}
-			});
 
 			return Promise.resolve();
 		});
