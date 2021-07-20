@@ -111,13 +111,13 @@ function Login2Page() {
 				<motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}>
 					<Typography className="text-32 sm:text-44 font-semibold leading-tight">
 						¡Bienvenido al sistema <br />
-						de prestadores de <br /> MEDINT!
+						de financiadores de <br /> MEDINT!
 					</Typography>
 				</motion.div>
 
 				<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0.3 } }}>
 					<Typography variant="subtitle1" className="mt-32 font-medium">
-						Aplicación completa para los prestadores afiliados con MEDINT.
+						Aplicación completa para los financiadores afiliados con MEDINT.
 					</Typography>
 				</motion.div>
 				</div>
