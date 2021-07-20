@@ -26,7 +26,11 @@ export const castDates = (sesiones) => {
 }
 
 export const castFechayHora = (datos) => {
-    datos.map(dato => {return dato.fechadecarga = dato.fechadecarga.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1')} );
+    if(datos){
+        datos.forEach(dato => {
+            dato.fechadecarga = dato.fechadecarga.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
+        });
+    }
 }
 
 export const castDatesDocumentos = (documentos) => {
