@@ -88,7 +88,9 @@ function OrdersHeader(props) {
 					type="month"
 					name="date"
 					style={{
-					margin: '0 0 0 auto'
+					margin: '0 0 0 auto',
+					color: 'black',
+					filter: 'invert(100%)'
 					}}
 					value={date}
 					onChange={handleChange}
