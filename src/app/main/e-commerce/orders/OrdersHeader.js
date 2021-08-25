@@ -7,8 +7,11 @@ import Typography from '@material-ui/core/Typography';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectMainTheme } from 'app/store/fuse/settingsSlice';
-import { getCurrentMonthAndYear, getPreviousMonthAndYear } from 'app/services/dateService/dateService';
+import { getCurrentMonthAndYear, getMonthAndYear, getPreviousMonthAndYear } from 'app/services/dateService/dateService';
 import { getOrders, getUrl, setOrdersSearchText } from '../store/ordersSlice';
+import { Button } from '@material-ui/core';
+import { existeFactura } from 'app/services/fetchService/fetchService';
+import AUTH_CONFIG from 'app/services/jwtService/jwtConfig';
 
 
 function OrdersHeader(props) {
@@ -17,24 +20,34 @@ function OrdersHeader(props) {
 	const mainTheme = useSelector(selectMainTheme);
 	const data = useSelector(state => state.eCommerceApp.orders.entities);
 	const { id: idPrestador } = useSelector(state => state.auth.user.data);
+	const [idFactura, setIdFactura] = useState(null);
 	
 	const today = getCurrentMonthAndYear();
 	const[date, setDate] = useState(today);
 
-	const handleChange = (e) => {
+	const handleChange = async (e) => {
 		setDate(e.target.value);
 	}
 
-	useEffect(() => {
-		let url = getUrl(date, idPrestador);
+	useEffect(async () => {
+		const url = getUrl(date, idPrestador);
 		dispatch(getOrders(url));
 
-		if(Object.keys(data).length === 0){
-			const lastMonth = getPreviousMonthAndYear();
-			setDate(lastMonth);
-			url = getUrl(date, idPrestador);
-			dispatch(getOrders(url));
-		} 
+		const fecha = getMonthAndYear(date);
+		const respuesta = await existeFactura(fecha[1], fecha[0], idPrestador);
+
+		if(respuesta.factura){
+			setIdFactura(respuesta.factura._id);
+		} else {
+			setIdFactura(null);
+		}
+
+		// if(Object.keys(data).length === 0){
+		// 	const lastMonth = getPreviousMonthAndYear();
+		// 	setDate(lastMonth);
+		// 	url = getUrl(date, idPrestador);
+		// 	dispatch(getOrders(url));
+		// } 
 	}, [date])
 
 	return (
@@ -83,7 +96,7 @@ function OrdersHeader(props) {
 					</Paper>
 					
 				</ThemeProvider>
-		
+				
 				<Input
 					type="month"
 					name="date"
@@ -95,6 +108,31 @@ function OrdersHeader(props) {
 					value={date}
 					onChange={handleChange}
 				/>
+
+				{ (idFactura) ?
+					<Button
+						className="whitespace-nowrap mx-4"
+						variant="contained"
+						color="secondary"
+						target="_blank" 
+						href={`${AUTH_CONFIG.domain}/factura/file/${idFactura}`}
+					>
+						Descargar Factura
+					</Button>
+
+					:
+
+					<Button
+						className="whitespace-nowrap mx-4"
+						disabled
+						variant="contained"
+						color="secondary"
+					>
+						Factura no disponible
+					</Button>
+
+				}
+
 	
 				
 			</div>

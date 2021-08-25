@@ -15,6 +15,62 @@ export const getPreviousMonthAndYear = () => {
     return `${year}-${month}`
 }
 
+export const getMonthAndYear = (date) => {
+
+    const fecha = date.split('-');
+    fecha[1] = getMonth(fecha[1]);
+
+    console.log(fecha);
+
+    return fecha;
+}
+
+export const getMonth = (month) => {
+
+    switch (month) {
+        case '01' || '1':
+            return 'Enero';
+
+        case '02' || '2':
+            return 'Febrero';
+
+        case '03' || '3':
+            return 'Marzo';
+
+        case '04' || '4':
+            return 'Abril';
+
+        case '05' || '5':
+            return 'Mayo';
+
+        case '06' || '6':
+            return 'Junio';
+
+        case '07' || '7':
+            return 'Julio';
+
+        case '08' || '8':
+            return 'Agosto';
+
+        case '09' || '9':
+            return 'Septiembre';
+
+        case '10':
+            return 'Octubre';
+
+        case '11':
+            return 'Noviembre';
+
+        case '12':
+            return 'Diciembre';
+
+        default: 
+            return false;
+            
+    }
+
+}
+
 export const castDates = (sesiones) => {
     sesiones.forEach(sesion => {
         const desde = new Date(sesion.fecha_desde);
