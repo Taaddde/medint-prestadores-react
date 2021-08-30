@@ -1,17 +1,14 @@
-import Accordion from '@material-ui/core/Accordion';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Avatar from '@material-ui/core/Avatar';
 import Icon from '@material-ui/core/Icon';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { castDatesDocumentos } from 'app/services/dateService/dateService';
 import { getDocumentos } from 'app/services/fetchService/fetchService';
 import AUTH_CONFIG from 'app/services/jwtService/jwtConfig';
-import GoogleMap from 'google-map-react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { date } from 'yup/lib/locale';
 import OrdersStatus from '../OrdersStatus';
 
 function Marker(props) {
@@ -33,6 +30,8 @@ function OrderDetailsTab() {
 		setDocumentos(data);
 
 	}, [])
+
+	castDatesDocumentos(documentos);
 
 	return (
 		<div className="table-responsive">
