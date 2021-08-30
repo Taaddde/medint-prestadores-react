@@ -36,7 +36,7 @@ function OrdersHeader(props) {
 		const fecha = getMonthAndYear(date);
 		const respuesta = await existeFactura(fecha[1], fecha[0], idPrestador);
 
-		if(respuesta.factura){
+		if(respuesta.factura && respuesta.factura.archivo){
 			setIdFactura(respuesta.factura._id);
 		} else {
 			setIdFactura(null);
