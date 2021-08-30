@@ -24,11 +24,12 @@ function Orders() {
 				innerScroll
 			/>
 		);
-	} else {
+	}
+	
 		return(
 			<Redirect to="/login" />
 		);
-	}
+		
 
 	
 	
