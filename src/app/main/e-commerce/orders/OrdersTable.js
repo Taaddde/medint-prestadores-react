@@ -112,7 +112,7 @@ function OrdersTable(props) {
 				className="flex flex-1 items-center justify-center h-full"
 			>
 				<Typography color="textSecondary" variant="h5">
-					No hay pacientes para mostrar
+					No hay pacientes para mostrar en el mes seleccionado
 				</Typography>
 			</motion.div>
 		);
@@ -188,7 +188,7 @@ function OrdersTable(props) {
 										</TableCell>
 
 										<TableCell className="p-4 md:p-16" component="th" scope="row">
-											{n.totalFacturado}
+											$ {n.totalFacturado}
 										</TableCell>
 									</TableRow>
 								);

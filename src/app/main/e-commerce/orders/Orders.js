@@ -25,10 +25,13 @@ function Orders() {
 			/>
 		);
 	}
+	
+		return(
+			<Redirect to="/login" />
+		);
+		
 
-	return(
-		<Redirect to="/login" />
-	)
+	
 	
 		
 	}

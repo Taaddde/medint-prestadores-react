@@ -13,7 +13,6 @@ import { Link, useParams } from 'react-router-dom';
 import { useDeepCompareEffect } from '@fuse/hooks';
 import reducer from '../store';
 import { resetOrder, getOrder } from '../store/orderSlice';
-import InvoiceTab from './tabs/InvoiceTab';
 import OrderDetailsTab from './tabs/OrderDetailsTab';
 import ProductsTab from './tabs/ProductsTab';
 
@@ -125,12 +124,14 @@ function Order(props) {
 					classes={{ root: 'w-full h-64' }}
 				>
 					<Tab className="h-64" label="Sesiones" />
+					<Tab className="h-64" label="Documentos" />
 				</Tabs>
 			}
 			content={
 				order && (
 					<div className="p-16 sm:p-24 max-w-2xl w-full">
 						{tabValue === 0 && <ProductsTab />}
+						{tabValue === 1 && <OrderDetailsTab />}
 					</div>
 				)
 			}
