@@ -136,7 +136,7 @@
         "tailwindcss-dir": "4.0.0"
     },
     "scripts": {
-        "start": "craco start",
+        "start": "craco start && serve",
         "build": "cross-env GENERATE_SOURCEMAP=false craco build && npm i -s serve && npm install -D tailwindcss@latest postcss@latest autoprefixer@latest",
         "test": "craco test --env=node",
         "eject": "craco eject",
