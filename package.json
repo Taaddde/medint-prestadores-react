@@ -136,7 +136,7 @@
         "tailwindcss-dir": "4.0.0"
     },
     "scripts": {
-        "start": "serve",
+        "start": "",
         "build": "cross-env GENERATE_SOURCEMAP=false craco build && npm i -s serve",
         "test": "craco test --env=node",
         "eject": "craco eject",
